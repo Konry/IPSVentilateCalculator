@@ -59,13 +59,13 @@ class VentilateCalculator extends IPSModule
     }
 	
 	public function CalculateAirVentilation(){
-		$innerTemp = GetValueFloat($this->ReadPropertyInteger('InnerTemperatureId'));
-		$innerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('InnerHumidityId'));
+		$innerTemp = GetValue($this->ReadPropertyInteger('InnerTemperatureId'));
+		$innerRelativeHumidity = GetValue($this->ReadPropertyInteger('InnerHumidityId'));
 
-		$outerTemp = GetValueFloat($this->ReadPropertyInteger('OuterTemperatureId'));
-		$outerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('OuterHumidityId'));
+		$outerTemp = GetValue($this->ReadPropertyInteger('OuterTemperatureId'));
+		$outerRelativeHumidity = GetValue($this->ReadPropertyInteger('OuterHumidityId'));
 		
-		$airPressure = GetValueFloat($this->ReadPropertyInteger('AirPressureId'));
+		$airPressure = GetValue($this->ReadPropertyInteger('AirPressureId'));
 		
 		$absoluteHumidityOuter = $this->getAbsoluteHumidity($outerTemp, $outerRelativeHumidity, $airPressure);
 		$absoluteHumidityInner = $this->getAbsoluteHumidity($innerTemp, $innerRelativeHumidity, $airPressure);
