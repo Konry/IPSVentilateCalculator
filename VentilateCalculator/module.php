@@ -86,7 +86,7 @@ class VentilateCalculator extends IPSModule
     public function TimerDone()
     {
         echo "execute script"
-		DoSomething();
+		$this->DoSomething();
     }
 	
 	public function getAbsoluteHumidity($temp, $humid) {
