@@ -57,6 +57,7 @@ class VentilateCalculator extends IPSModule
     }
 	
 	public function DoSomething(){
+		$this->SendDebug("Start DoSomething", "Do something ", 0);
 		$innerTemp = GetValueFloat($this->ReadPropertyInteger('InnerTemperatureId'));
 		$innerRelativeHumidity = GetValue($this->ReadPropertyInteger('InnerHumidityId'));
 
