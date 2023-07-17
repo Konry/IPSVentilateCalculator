@@ -59,6 +59,8 @@ class VentilateCalculator extends IPSModule
     }
 	
 	public function CalculateAirVentilation(){
+		$this->SendDebug("CalculateAirVentilation", "Calculated the ventilation, result: ".$shallBeAiredValue, 0);
+
 		$innerTemp = GetValueFloat($this->ReadPropertyInteger('InnerTemperatureId'));
 		$innerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('InnerHumidityId'));
 
@@ -67,7 +69,10 @@ class VentilateCalculator extends IPSModule
 		
 		$airPressure = GetValueFloat($this->ReadPropertyInteger('AirPressureId'));
 		
-		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity, $airPressure), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity, $airPressure));
+		$absoluteHumidityOuter = $this->getAbsoluteHumidity($outerTemp, $outerRelativeHumidity, $airPressure);
+		$absoluteHumidityInner = $this->getAbsoluteHumidity($innerTemp, $innerRelativeHumidity, $airPressure);
+		
+		$shallBeAiredValue = $this->shallBeAired($absoluteHumidityOuter, $absoluteHumidityInner);
 
 		$this->SendDebug("CalculateAirVentilation", "Calculated the ventilation, result: ".$shallBeAiredValue, 0);
 		SetValueBoolean($this->GetIDForIdent('Ventilate'), $shallBeAiredValue);
@@ -106,7 +111,7 @@ class VentilateCalculator extends IPSModule
 		$this->CalculateAirVentilation();
     }
 	
-	public function getAbsoluteHumidity($temp, $humidity, $airPressure) {
+	private function getAbsoluteHumidity($temp, $humidity, $airPressure) {
 		$airPressure = GetValueFloat($airPressure);
 		$tempInKelvin = $temp + 273.15;
 		$array = [
@@ -142,7 +147,7 @@ class VentilateCalculator extends IPSModule
 		return ((($airPressure / 1000) * $humidity / 100 * $interpolatedValue)/(461.5*$tempInKelvin)*1000);
 	}
 
-	public function shallBeAired($absHumidityOuter, $absHumidityInner) {
+	private function shallBeAired($absHumidityOuter, $absHumidityInner) {
 		return ($absHumidityOuter< $absHumidityInner);
 	}
 }
