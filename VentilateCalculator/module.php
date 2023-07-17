@@ -60,7 +60,7 @@ class VentilateCalculator extends IPSModule
 		$outerTemp = GetValueFloat($this->ReadPropertyInteger('OuterTemperatureId'));
 		$outerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('OuterHumidityId'));
 		
-		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity)));
+		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity));
 		SetValueBoolean($this->GetIDForIdent('Ventilate'), $shallBeAiredValue);
 	}
 
