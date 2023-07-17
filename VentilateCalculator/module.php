@@ -23,7 +23,7 @@ class VentilateCalculator extends IPSModule
         $this->RegisterPropertyFloat('DiffValue', 0);
 
         //Timer
-        $this->RegisterTimer('CheckTimer', 0, 'VC_TimerDone($_IPS[\'TARGET\']);');
+        $this->RegisterTimer('CheckTimer', $this->ReadPropertyInteger('CheckInterval') * 1000, 'VC_TimerDone($_IPS[\'TARGET\']);');
 
         if (!IPS_VariableProfileExists('VC.Ventilate')) {
             IPS_CreateVariableProfile('VC.Ventilate', 0);
@@ -49,8 +49,11 @@ class VentilateCalculator extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+		$this->SendDebug("ApplyChanges", "Update Changes", 0);
 
-		$this->SetTimerInterval('CheckTimer', $this->ReadPropertyInteger('CheckInterval') * 1000);
+		if ($this->ReadPropertyInteger('CheckInterval') == 1){
+			$this->SetTimerInterval('CheckTimer', $this->ReadPropertyInteger('CheckInterval') * 1000);
+		}
     }
 	
 	public function DoSomething(){
@@ -61,13 +64,24 @@ class VentilateCalculator extends IPSModule
 		$outerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('OuterHumidityId'));
 		
 		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity));
+
+		$this->SendDebug("DoSomething", "Do something ".$shallBeAiredValue, 0);
 		SetValueBoolean($this->GetIDForIdent('Ventilate'), $shallBeAiredValue);
 	}
 
     public function SetActive(bool $Active)
     {
         //Modul aktivieren
+		$this->SendDebug("Set active hit", "Set active value to ".$Active."", 0);
         SetValue($this->GetIDForIdent('Active'), $Active);
+		
+		if ($Active) {
+			$timerIntervalInMilliSec = $this->ReadPropertyInteger('CheckInterval') * 1000;
+			$this->SetTimerInterval('CheckTimer', $timerIntervalInMilliSec);
+			$this->SendDebug("Set active", "Set active value to ".$Active." " .$timerIntervalInMilliSec, 0);
+        } else {
+			$this->SetTimerInterval('CheckTimer', 0);
+		}
         return true;
     }
 
