@@ -27,8 +27,8 @@ class VentilateCalculator extends IPSModule
 
         if (!IPS_VariableProfileExists('VC.Ventilate')) {
             IPS_CreateVariableProfile('VC.Ventilate', 0);
-            IPS_SetVariableProfileAssociation('VC.Status', 0, $this->Translate('No ventilation'), 'NoVentilation', -1);
-            IPS_SetVariableProfileAssociation('VC.Status', 1, $this->Translate('Ventilation'), 'Ventilation', -1);
+            IPS_SetVariableProfileAssociation('VC.Ventilate', 0, $this->Translate('No ventilation'), 'NoVentilation', -1);
+            IPS_SetVariableProfileAssociation('VC.Ventilate', 1, $this->Translate('Ventilation'), 'Ventilation', -1);
         }
 
         //Updating legacy profiles to also beeing associative
@@ -50,76 +50,22 @@ class VentilateCalculator extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-		/*
-        //Deleting outdated events
-        $eventID = @$this->GetIDForIdent('EventUp');
-        if ($eventID) {
-            IPS_DeleteEvent($eventID);
-        }
-
-        $eventID = @$this->GetIDForIdent('EventDown');
-        if ($eventID) {
-            IPS_DeleteEvent($eventID);
-        }
-
-        //Unregister all messages in order to read them
-        foreach ($this->GetMessageList() as $senderID => $messages) {
-            foreach ($messages as $message) {
-                $this->UnregisterMessage($senderID, $message);
-            }
-        }
-        $this->RegisterMessage($this->ReadPropertyInteger('SourceID'), VM_UPDATE);
-
-        //Add references
-        foreach ($this->GetReferenceList() as $referenceID) {
-            $this->UnregisterReference($referenceID);
-        }
-        if ($this->ReadPropertyInteger('SourceID') != 0) {
-            $this->RegisterReference($this->ReadPropertyInteger('SourceID'));
-        }
-		*/
 		$this->SetTimerInterval('CheckTimer', $this->ReadPropertyInteger('CheckInterval') * 1000);
     }
 	
 	public function DoSomething(){
+		$innerTemp = GetValueFloat($this->ReadPropertyInteger('InnerTemperatureId'));
+		$innerRelativeHumidity = GetValue($this->ReadPropertyInteger('InnerHumidityId'));
+
+		$outerTemp = GetValueFloat($this->ReadPropertyInteger('OuterTemperatureId'));
+		$outerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('OuterHumidityId'));
 		
-		include(IPS_GetScriptFile(40167));
-
-		$tempInnen = GetValueFloat(15517);
-		$relativeLuftfeuchteInnen = GetValue(30332);
-
-		$tempAußen = GetValueFloat(43458);
-		$relativeLuftfeuchteAußen = GetValueFloat(40144);
-
-		#echo shallBeAired(getAbsoluteHumidity($tempAußen, $relativeLuftfeuchteAußen), getAbsoluteHumidity($tempInnen, $relativeLuftfeuchteInnen));
-		SetBooleanValue(30030, shallBeAired(getAbsoluteHumidity($tempAußen, $relativeLuftfeuchteAußen), getAbsoluteHumidity($tempInnen, $relativeLuftfeuchteInnen)));
-		#echo $_IPS['VARIABLE'];
+		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity)));
+		SetBooleanValue($this->GetIDForIdent('Ventilate'), $shallBeAiredValue);
 	}
 
     public function SetActive(bool $Active)
     {
-		/*
-        if ($this->ReadPropertyInteger('SourceID') == 0) {
-            SetValue($this->GetIDForIdent('Status'), 0);
-
-            //Modul Deaktivieren
-            SetValue($this->GetIDForIdent('Active'), false);
-            echo 'No variable selected';
-            return false;
-        }
-
-        if ($Active) {
-            if (GetValue($this->ReadPropertyInteger('SourceID')) >= $this->ReadPropertyFloat('BorderValue')) {
-                SetValue($this->GetIDForIdent('Status'), 1);
-                $this->SetBuffer('StatusBuffer', 'Running');
-            } else {
-                SetValue($this->GetIDForIdent('Status'), 0);
-            }
-        } else {
-            SetValue($this->GetIDForIdent('Status'), 0);
-        }
-		*/
-
         //Modul aktivieren
         SetValue($this->GetIDForIdent('Active'), $Active);
         return true;
@@ -137,26 +83,10 @@ class VentilateCalculator extends IPSModule
         }
     }
 
-/*
-    public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
-    {
-        if (GetValue($this->GetIDForIdent('Active'))) {
-            if (($Data[0] < $this->ReadPropertyFloat('BorderValue')) && (GetValue($this->GetIDForIdent('Status')) == 1) && ($this->GetBuffer('StatusBuffer') == 'Running')) {
-                $this->SetTimerInterval('CheckTimer', $this->ReadPropertyInteger('Period') * 1000);
-                $this->SetBuffer('StatusBuffer', 'TimerDone');
-            } elseif ($Data[0] > $this->ReadPropertyFloat('BorderValue')) {
-                SetValue($this->GetIDForIdent('Status'), 1);
-                $this->SetTimerInterval('CheckTimer', 0);
-                $this->SetBuffer('StatusBuffer', 'Running');
-            }
-        }
-    }
-	*/
-
     public function TimerDone()
     {
         echo "execute script"
-        //$this->SetTimerInterval('CheckTimer', 0);
+		DoSomething();
     }
 	
 	public function getAbsoluteHumidity($temp, $humid) {

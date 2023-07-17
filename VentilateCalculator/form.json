@@ -2,17 +2,17 @@
   "elements":
   [
 	{ "type": "Label", "label": "Sourcevariables which are used to calculate the values." },
-	{ "type": "SelectVariable", "name": "InnerTemperatureId", "caption": "Inner temperature" }, # was SourceID
+	{ "type": "SelectVariable", "name": "InnerTemperatureId", "caption": "Inner temperature" },
 	{ "type": "SelectVariable", "name": "InnerHumidityId", "caption": "Inner humidity" },
 	{ "type": "SelectVariable", "name": "InnerCo2Id", "caption": "Inner co2" },
 	{ "type": "SelectVariable", "name": "OuterTemperatureId", "caption": "Outer temperature" },
 	{ "type": "SelectVariable", "name": "OuterHumidityId", "caption": "Outer humidity" },
 	{ "type": "Label", "label": "CO2 value which is needed to start a ventilation." },
-	{ "type": "NumberSpinner", "name": "Co2ValueStarting", "caption": "Co2Value Starting", "digits": 0}, # was Bordervalue
+	{ "type": "NumberSpinner", "name": "Co2ValueStarting", "caption": "Co2Value Starting", "digits": 0},
 	{ "type": "Label", "label": "CO2 value which is needed to stops the ventilation." },
-	{ "type": "NumberSpinner", "name": "Co2ValueStopping", "caption": "Co2Value Stopping", "digits": 0}, # was Bordervalue
+	{ "type": "NumberSpinner", "name": "Co2ValueStopping", "caption": "Co2Value Stopping", "digits": 0},
 	{ "type": "Label", "label": "Difference value which is needed to start a ventilation in absolute humidity." },
-	{ "type": "NumberSpinner", "name": "DiffValue", "caption": "DiffValue", "digits": 2}, # was Bordervalue
+	{ "type": "NumberSpinner", "name": "DiffValue", "caption": "DiffValue", "digits": 2}, 
 	{ "type": "Label", "label": "Checking-Time to calculate ventilation" },
 	{ "type": "IntervalBox", "name": "CheckInterval", "caption": "Seconds" }
   ],
