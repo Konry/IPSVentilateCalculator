@@ -49,9 +49,9 @@ class VentilateCalculator extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-		$this->SendDebug("ApplyChanges", "Update Changes", 0);
 
-		if ($this->ReadPropertyInteger('CheckInterval') == 1){
+		if ($this->ReadPropertyInteger('Active') == 1){
+			this->SendDebug("ApplyChanges", "Update Timer", 0);
 			$this->SetTimerInterval('CheckTimer', $this->ReadPropertyInteger('CheckInterval') * 1000);
 		}
     }
