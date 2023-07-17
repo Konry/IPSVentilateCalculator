@@ -109,9 +109,8 @@ class VentilateCalculator extends IPSModule
 		$this->CalculateAirVentilation();
     }
 	
-	private function getAbsoluteHumidity($temp, $humidity, $airPressure) {
-		$airPressure = GetValueFloat($airPressure);
-		$tempInKelvin = $temp + 273.15;
+	private function getAbsoluteHumidity($temperature, $humidity, $airPressure) {
+		$tempInKelvin = $temperature + 273.15;
 		$array = [
 			268 => 401.1,
 			273 => 610.8,
