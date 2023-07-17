@@ -14,6 +14,7 @@ class VentilateCalculator extends IPSModule
         $this->RegisterPropertyInteger('InnerCo2Id', 0);
         $this->RegisterPropertyInteger('OuterTemperatureId', 0);
         $this->RegisterPropertyInteger('OuterHumidityId', 0);
+        $this->RegisterPropertyInteger('AirPressureId', 0);
 		
 		// Co2 handling
         $this->RegisterPropertyInteger('Co2ValueStarting', 0);
@@ -51,36 +52,38 @@ class VentilateCalculator extends IPSModule
         parent::ApplyChanges();
 
 		if ($this->ReadPropertyInteger('Active') == 1){
-			this->SendDebug("ApplyChanges", "Update Timer", 0);
-			$this->SetTimerInterval('CheckTimer', $this->ReadPropertyInteger('CheckInterval') * 1000);
+			$timerIntervalInMilliSec = $this->ReadPropertyInteger('CheckInterval') * 1000;
+			$this->SetTimerInterval('CheckTimer', $timerIntervalInMilliSec);
+			$this->SendDebug("ApplyChanges", "Update timer to " .$timerIntervalInMilliSec. "ms", 0);
 		}
     }
 	
-	public function DoSomething(){
-		$this->SendDebug("Start DoSomething", "Do something ", 0);
+	public function CalculateAirVentilation(){
 		$innerTemp = GetValueFloat($this->ReadPropertyInteger('InnerTemperatureId'));
-		$innerRelativeHumidity = GetValue($this->ReadPropertyInteger('InnerHumidityId'));
+		$innerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('InnerHumidityId'));
 
 		$outerTemp = GetValueFloat($this->ReadPropertyInteger('OuterTemperatureId'));
 		$outerRelativeHumidity = GetValueFloat($this->ReadPropertyInteger('OuterHumidityId'));
 		
-		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity));
+		$airPressure = GetValueFloat($this->ReadPropertyInteger('AirPressureId'));
+		
+		$shallBeAiredValue = shallBeAired(getAbsoluteHumidity($outerTemp, $outerRelativeHumidity, $airPressure), getAbsoluteHumidity($innerTemp, $innerRelativeHumidity, $airPressure));
 
-		$this->SendDebug("DoSomething", "Do something ".$shallBeAiredValue, 0);
+		$this->SendDebug("CalculateAirVentilation", "Calculated the ventilation, result: ".$shallBeAiredValue, 0);
 		SetValueBoolean($this->GetIDForIdent('Ventilate'), $shallBeAiredValue);
 	}
 
-    public function SetActive(bool $Active)
+    public function SetActive(bool $active)
     {
         //Modul aktivieren
-		$this->SendDebug("Set active hit", "Set active value to ".$Active."", 0);
-        SetValue($this->GetIDForIdent('Active'), $Active);
+        SetValue($this->GetIDForIdent('Active'), $active);
 		
-		if ($Active) {
+		if ($active) {
 			$timerIntervalInMilliSec = $this->ReadPropertyInteger('CheckInterval') * 1000;
 			$this->SetTimerInterval('CheckTimer', $timerIntervalInMilliSec);
-			$this->SendDebug("Set active", "Set active value to ".$Active." " .$timerIntervalInMilliSec, 0);
+			$this->SendDebug("SetActive", "Enabled next timer in " .$timerIntervalInMilliSec. "ms", 0);
         } else {
+			$this->SendDebug("SetActive", "Disabled, disable timer", 0);
 			$this->SetTimerInterval('CheckTimer', 0);
 		}
         return true;
@@ -100,12 +103,11 @@ class VentilateCalculator extends IPSModule
 
     public function TimerDone()
     {
-		$this->SendDebug("TimerDone", "TimerDone", 0);
-		$this->DoSomething();
+		$this->CalculateAirVentilation();
     }
 	
-	public function getAbsoluteHumidity($temp, $humid) {
-		$luftdruck = GetValueFloat(36920);
+	public function getAbsoluteHumidity($temp, $humidity, $airPressure) {
+		$airPressure = GetValueFloat($airPressure);
 		$tempInKelvin = $temp + 273.15;
 		$array = [
 			268 => 401.1,
@@ -137,7 +139,7 @@ class VentilateCalculator extends IPSModule
 				$oldValue = $value;
 			}
 		}
-		return ((($airPressure / 1000) * $humid / 100 * $interpolatedValue)/(461.5*$tempInKelvin)*1000);
+		return ((($airPressure / 1000) * $humidity / 100 * $interpolatedValue)/(461.5*$tempInKelvin)*1000);
 	}
 
 	public function shallBeAired($absHumidityOuter, $absHumidityInner) {

@@ -19,7 +19,8 @@
 			"Active" : "Aktiv",
 			"No ventilation" : "Nicht Lüften",
 			"Ventilation" : "Lüften",
-			"CheckInterval" : "Prüf Intervall"
+			"CheckInterval" : "Prüf Intervall",
+			"Air Pressure" : "Luftdruck"
 		}
 	}
 }

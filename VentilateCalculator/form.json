@@ -30,6 +30,11 @@
          "caption":"Outer humidity"
       },
       {
+         "type":"SelectVariable",
+         "name":"AirPressureId",
+         "caption":"Air Pressure"
+      },
+      {
          "type":"Label",
          "label":"CO2 value which is needed to start a ventilation."
       },
