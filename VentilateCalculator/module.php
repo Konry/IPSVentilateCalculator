@@ -85,7 +85,7 @@ class VentilateCalculator extends IPSModule
 
     public function TimerDone()
     {
-        echo "execute script"
+        echo "execute script";
 		$this->DoSomething();
     }
 	
