@@ -1,0 +1,25 @@
+{
+	"translations": {
+		"de": { 
+			"Sourcevariables which are used to calculate the values." : "Quellvariablen, welche zur Berechnung genutzt werden"
+			"Inner temperature"  : "Temperatur Innen"
+			"Inner humidity"  : "Luftfeuchtigkeit Innen"
+			"Inner co2": "Co2 Innen"
+			"Outer temperature"  : "Temperatur Außen"
+			"Outer humidity" : "Luftfeuchtigkeit Außen"
+			"CO2 value which is needed to start a ventilation."  : "Co2 Wert der die Ventilation auslöst"
+			"CO2 value which is needed to stops the ventilation."  : "Co2 Wert der die Ventilation stoppt"
+			"Co2Value Starting" : "Co2 Wert Start"
+			"Co2Value Stopping" : "Co2 Wert Stop"
+			"Difference value which is needed to start a ventilation in absolute humidity."  : "Differenzwert, der absuluten Luftfeuchtigkeit, der benötigt wird um die Ventilation zu starten"
+			"DiffValue" : "Differenzwert"
+			"Checking-Time to calculate ventilation"  : "Prüfinterval zum berechnen der benötigten Belüftung"
+			"Seconds"  : "Sekunden"
+			"Ventilate" : "Lüften"
+			"Active" : "Aktiv"
+			"No ventilation" : "Nicht Lüften"
+			"Ventilation" : "Lüften"
+			"CheckInterval" : "Prüf Intervall"
+		}
+	}
+}

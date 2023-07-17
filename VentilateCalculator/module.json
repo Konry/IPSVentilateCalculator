@@ -1,0 +1,15 @@
+{
+    "id": "{F1175E70-99F5-45E0-69F5-E43279904EAD}",
+    "name": "VentilateCalculator",
+    "type": 3,
+    "vendor": "",
+    "aliases": 
+    [
+        "VentilateCalculator"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "VC",
+    "url": "https://github.com/Konry/IPSVentilateCalculator/tree/main/IPSVentilateCalculator"
+}
