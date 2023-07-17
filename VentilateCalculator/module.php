@@ -51,7 +51,7 @@ class VentilateCalculator extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-		if ($this->ReadPropertyBoolean('Active') == 1){
+		if (GetValueBoolean($this->GetIDForIdent('Active')) == 1){
 			$timerIntervalInMilliSec = $this->ReadPropertyInteger('CheckInterval') * 1000;
 			$this->SetTimerInterval('CheckTimer', $timerIntervalInMilliSec);
 			$this->SendDebug("ApplyChanges", "Update timer to " .$timerIntervalInMilliSec. "ms", 0);
