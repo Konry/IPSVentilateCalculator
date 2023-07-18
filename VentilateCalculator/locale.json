@@ -20,7 +20,16 @@
 			"No ventilation" : "Nicht Lüften",
 			"Ventilation" : "Lüften",
 			"CheckInterval" : "Prüf Intervall",
-			"Air Pressure" : "Luftdruck"
+			"Air Pressure" : "Luftdruck",
+			"Relative humidity warning level": "Relative Luftfeuchtigkeit Warnschwelle",
+			"Relative humidity out of range level": "Relative Luftfeuchtigkeit überhalb der Schwelle",
+			"Relative humidity thresholds": "Relative Luftfeuchtigkeit Schwellenwerte",
+			"CO2 thresholds": "CO2 Schwellenwerte",
+			"CO2 warning level": "CO2 Warnschwelle",
+			"CO2 out of range level": "CO2 überhalb der Schwelle",
+			"CO2 mode": "CO2 Modus",
+			"Relative humidity mode": "Relative Luftfeuchtigkeit Modus",
+			"VentilationScale": "Lüftungsskala"
 		}
 	}
 }
