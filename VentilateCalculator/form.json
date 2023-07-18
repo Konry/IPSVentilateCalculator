@@ -7,7 +7,8 @@
       {
          "type":"SelectVariable",
          "name":"InnerTemperatureId",
-         "caption":"Inner temperature"
+         "caption":"Inner temperature",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
