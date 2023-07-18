@@ -7,62 +7,91 @@
       {
          "type":"SelectVariable",
          "name":"InnerTemperatureId",
-         "caption":"Inner temperature"
+         "caption":"Inner temperature",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"InnerHumidityId",
-         "caption":"Inner humidity"
-      },
-      {
-         "type":"SelectVariable",
-         "name":"InnerCo2Id",
-         "caption":"Inner co2"
+         "caption":"Inner humidity",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"OuterTemperatureId",
-         "caption":"Outer temperature"
+         "caption":"Outer temperature",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"OuterHumidityId",
-         "caption":"Outer humidity"
+         "caption":"Outer humidity",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"AirPressureId",
-         "caption":"Air Pressure"
+         "caption":,
+         "width": "500px"
       },
       {
-         "type":"Label",
-         "label":"CO2 value which is needed to start a ventilation."
+         "type": "ExpansionPanel",
+         "caption": "Humidity Expansion Panel",
+         "items": [
+            {
+               "type": "Label",
+               "label": "Relative humidity thresholds"
+            },
+            {
+               "type": "CheckBox",
+               "name": "RelativeHumidityMode",
+               "caption": "Relative humidity mode"
+            },
+            {
+               "type": "NumberSpinner",
+               "name": "RelativeHumidityYellowRange",
+               "caption": "Relative humidity warning level",
+               "digits": 0
+            },
+            {
+               "type": "NumberSpinner",
+               "name": "RelativeHumidityRedRange",
+               "caption": "Relative humidity out of range level",
+               "digits": 0
+            }
+         ]
       },
       {
-         "type":"NumberSpinner",
-         "name":"Co2ValueStarting",
-         "caption":"Co2Value Starting",
-         "digits":0
-      },
-      {
-         "type":"Label",
-         "label":"CO2 value which is needed to stops the ventilation."
-      },
-      {
-         "type":"NumberSpinner",
-         "name":"Co2ValueStopping",
-         "caption":"Co2Value Stopping",
-         "digits":0
-      },
-      {
-         "type":"Label",
-         "label":"Difference value which is needed to start a ventilation in absolute humidity."
-      },
-      {
-         "type":"NumberSpinner",
-         "name":"DiffValue",
-         "caption":"DiffValue",
-         "digits":2
+         "type": "ExpansionPanel",
+         "caption": "CO2 Expansion Panel",
+         "items": [
+            {
+               "type":"Label",
+               "label":"CO2 thresholds"
+            },
+            {
+               "type": "CheckBox",
+               "name": "CO2Mode",
+               "caption": "CO2 Modus"
+            },
+            {
+               "type":"SelectVariable",
+               "name":"InnerCo2Id",
+               "caption":"Inner co2"
+            },
+            {
+               "type":"NumberSpinner",
+               "name":"CO2YellowLevel",
+               "caption":"CO2 warning level",
+               "digits": 0
+            },
+            {
+               "type":"NumberSpinner",
+               "name":"CO2RedLevel",
+               "caption":"CO2 out of range level",
+               "digits": 0
+            }
+         ]
       },
       {
          "type":"Label",
