@@ -30,46 +30,63 @@
          "caption":"Air Pressure"
       },
       {
-         "type":"Label",
-         "label":"Relative humidity thresholds"
+         "type": "ExpansionPanel",
+         "caption": "CO2 Expansion Panel",
+         "items": [
+            {
+               "type": "Label",
+               "label": "Relative humidity thresholds"
+            },
+            {
+               "type": "CheckBox",
+               "name": "RelativeHumidityMode",
+               "caption": "Relative humidity mode"
+            },
+            {
+               "type": "NumberSpinner",
+               "name": "RelativeHumidityYellowRange",
+               "caption": "Relative humidity warning level",
+               "digits": 0
+            },
+            {
+               "type": "NumberSpinner",
+               "name": "RelativeHumidityRedRange",
+               "caption": "Relative humidity out of range level",
+               "digits": 0
+            }
+         ]
       },
       {
-         "type": "CheckBox",
-         "name": "RelativeHumidityMode",
-         "caption": "Relative humidity mode"
-      },
-      {
-         "type":"NumberSpinner",
-         "name":"RelativeHumidityYellowRange",
-         "caption":"Relative humidity warning level",
-         "digits": 0
-      },
-      {
-         "type":"NumberSpinner",
-         "name":"RelativeHumidityRedRange",
-         "caption":"Relative humidity out of range level",
-         "digits": 0
-      },
-      {
-         "type":"Label",
-         "label":"CO2 thresholds"
-      },
-      {
-         "type": "CheckBox",
-         "name": "CO2Mode",
-         "caption": "CO2 Modus"
-      },
-      {
-         "type":"NumberSpinner",
-         "name":"CO2YellowLevel",
-         "caption":"CO2 warning level",
-         "digits": 0
-      },
-      {
-         "type":"NumberSpinner",
-         "name":"CO2RedLevel",
-         "caption":"CO2 out of range level",
-         "digits": 0
+         "type": "ExpansionPanel",
+         "caption": "CO2 Expansion Panel",
+         "items": [
+            {
+               "type":"Label",
+               "label":"CO2 thresholds"
+            },
+            {
+               "type": "CheckBox",
+               "name": "CO2Mode",
+               "caption": "CO2 Modus"
+            },
+            {
+               "type":"SelectVariable",
+               "name":"InnerCo2Id",
+               "caption":"Inner co2"
+            },
+            {
+               "type":"NumberSpinner",
+               "name":"CO2YellowLevel",
+               "caption":"CO2 warning level",
+               "digits": 0
+            },
+            {
+               "type":"NumberSpinner",
+               "name":"CO2RedLevel",
+               "caption":"CO2 out of range level",
+               "digits": 0
+            }
+         ]
       },
       {
          "type":"Label",

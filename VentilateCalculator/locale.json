@@ -29,7 +29,9 @@
 			"CO2 out of range level": "CO2 überhalb der Schwelle",
 			"CO2 mode": "CO2 Modus",
 			"Relative humidity mode": "Relative Luftfeuchtigkeit Modus",
-			"VentilationScale": "Lüftungsskala"
+			"VentilationScale": "Lüftungsskala",
+			"CO2 Expansion Panel": "CO2 Erweiterung",
+			"Humidity Expansion Panel": "Luftfeuchte Erweiterung"
 		}
 	}
 }
