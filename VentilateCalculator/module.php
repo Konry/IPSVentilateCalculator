@@ -181,12 +181,12 @@ class VentilateCalculator extends IPSModule
         $ventilationValue = max($valueCo2, $valueHumidity);
         if($ventilate){
             if($ventilationValue >= 0){
-                SetValueFloat($this->GetIDForIdent('Ventilate'), $ventilationValue);
+                SetValueFloat($this->GetIDForIdent('VentilationScale'), $ventilationValue);
             } else {
-                SetValueFloat($this->GetIDForIdent('Ventilate'), 0);
+                SetValueFloat($this->GetIDForIdent('VentilationScale'), 0);
             }
         }else{
-            SetValueFloat($this->GetIDForIdent('Ventilate'), 0);
+            SetValueFloat($this->GetIDForIdent('VentilationScale'), 0);
         }
     }
 	
