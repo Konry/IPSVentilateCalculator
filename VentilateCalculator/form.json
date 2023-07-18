@@ -13,22 +13,26 @@
       {
          "type":"SelectVariable",
          "name":"InnerHumidityId",
-         "caption":"Inner humidity"
+         "caption":"Inner humidity",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"OuterTemperatureId",
-         "caption":"Outer temperature"
+         "caption":"Outer temperature",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"OuterHumidityId",
-         "caption":"Outer humidity"
+         "caption":"Outer humidity",
+         "width": "500px"
       },
       {
          "type":"SelectVariable",
          "name":"AirPressureId",
-         "caption":"Air Pressure"
+         "caption":,
+         "width": "500px"
       },
       {
          "type": "ExpansionPanel",
