@@ -120,7 +120,7 @@ class VentilateCalculator extends IPSModule
     }
 
     private function CalculateVentilationScaleHumidity() : float {
-        $humidityMode = GetValueBoolean($this->ReadPropertyBoolean('RelativeHumidityModeActivated'));
+        $humidityMode = GetValueBoolean($this->ReadPropertyBoolean('RelativeHumidityMode'));
         if($humidityMode == 0){
             return -1;
         }
