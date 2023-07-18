@@ -124,8 +124,8 @@ class VentilateCalculator extends IPSModule
         if($humidityMode == 0){
             return -1;
         }
-        $humidityYellowRange = $this->ReadPropertyInteger('RelativeHumidityYellowRange');
-        $humidityRedRange = $this->ReadPropertyInteger('RelativeHumidityRedRange');
+        $humidityYellowRange = $this->ReadPropertyFloat('RelativeHumidityYellowRange');
+        $humidityRedRange = $this->ReadPropertyFloat('RelativeHumidityRedRange');
 
         $innerRelativeHumidity = GetValue($this->ReadPropertyInteger('InnerHumidityId'));
 
