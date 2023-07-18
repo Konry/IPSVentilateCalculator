@@ -172,8 +172,11 @@ class VentilateCalculator extends IPSModule
     public function TimerDone()
     {
 		$ventilate = $this->CalculateAirVentilation();
+        $this->SendDebug("TimerDone", "Calculate Air Ventilation " .$ventilate, 0);
         $valueCo2 = $this->CalculateVentilationScaleCo2();
+        $this->SendDebug("TimerDone", "Calculate Ventilation Scale Co2 " .$valueCo2, 0);
         $valueHumidity = $this->CalculateVentilationScaleHumidity();
+        $this->SendDebug("TimerDone", "Calculate Ventilation Scale Humidity " .$valueHumidity, 0);
 
         $ventilationValue = max($valueCo2, $valueHumidity);
         if($ventilate){
