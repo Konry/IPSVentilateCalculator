@@ -31,7 +31,7 @@
       },
       {
          "type": "ExpansionPanel",
-         "caption": "CO2 Expansion Panel",
+         "caption": "Humidity Expansion Panel",
          "items": [
             {
                "type": "Label",
