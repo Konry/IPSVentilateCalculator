@@ -99,12 +99,12 @@ class VentilateCalculator extends IPSModule
 	}
 
     private function CalculateVentilationScaleCo2() : float {
-        $co2Mode = GetValueBoolean($this->ReadPropertyBoolean('CO2Mode'));
+        $co2Mode = $this->ReadPropertyBoolean('CO2Mode');
         if($co2Mode == 0){
             return -1;
         }
-        $co2YellowRange = GetValue($this->ReadPropertyInteger('CO2YellowLevel'));
-        $co2RedRange = GetValue($this->ReadPropertyInteger('CO2RedLevel'));
+        $co2YellowRange = $this->ReadPropertyInteger('CO2YellowLevel');
+        $co2RedRange = $this->ReadPropertyInteger('CO2RedLevel');
 
         $innerRelativeCo2 = GetValue($this->ReadPropertyInteger('InnerCo2Id'));
 
@@ -120,12 +120,12 @@ class VentilateCalculator extends IPSModule
     }
 
     private function CalculateVentilationScaleHumidity() : float {
-        $humidityMode = GetValueBoolean($this->ReadPropertyBoolean('RelativeHumidityMode'));
+        $humidityMode = $this->ReadPropertyBoolean('RelativeHumidityMode');
         if($humidityMode == 0){
             return -1;
         }
-        $humidityYellowRange = GetValue($this->ReadPropertyInteger('RelativeHumidityYellowRange'));
-        $humidityRedRange = GetValue($this->ReadPropertyInteger('RelativeHumidityRedRange'));
+        $humidityYellowRange = $this->ReadPropertyInteger('RelativeHumidityYellowRange');
+        $humidityRedRange = $this->ReadPropertyInteger('RelativeHumidityRedRange');
 
         $innerRelativeHumidity = GetValue($this->ReadPropertyInteger('InnerHumidityId'));
 
